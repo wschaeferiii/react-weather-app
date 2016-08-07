@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import Chart from '../components/chart';
+import GoogleMap from '../components/google_map';
 
 
 class WeatherList extends Component {
@@ -11,10 +12,11 @@ class WeatherList extends Component {
     const temps = cityData.list.map(weather => weather.main.temp);
     const humidities = cityData.list.map(weather => weather.main.humidity);
     const pressures = cityData.list.map(weather => weather.main.pressure);
+    const { lon, lat } = cityData.city.coord;
 
     return ( 
       <tr key={cityName}>
-        <td>{cityName}</td>
+        <td><GoogleMap lon={lon} lat={lat} /> </td>
         <td><Chart data={temps} color='orange' units='k' /></td>
         <td><Chart data={humidities} color='green' units='kPa' /></td>
         <td><Chart data={pressures} color='blue' units='%' /></td>
@@ -44,7 +46,7 @@ class WeatherList extends Component {
 // instead of state, we can just put weather as the parameter.  
 // Same as doing const weather = state.weather
 function mapStateToProps({weather}) {
-  // { weather } is just ES6 for { weather: weather }
+  // the { weather } below is just ES6 for { weather: weather }
   return { weather } 
 }
 

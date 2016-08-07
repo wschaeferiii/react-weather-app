@@ -9,6 +9,8 @@ class SearchBar extends Component {
 
     this.state = { term: '' };
 
+    // binding the SearchBar Component to its methods so 'this'
+    // isn't lost when calling the render method
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
 
